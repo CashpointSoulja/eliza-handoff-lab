@@ -44,13 +44,13 @@ Run `npm run eval`. These numbers describe **synthetic scenarios written to test
 | v3 Fast path | 93% | 40% | 1 | 88% | 100% | 67% | 93% | 67% | 700 ms |
 
 What to take from it:
-- **v1 → v2:** containment drops from 60% to 33% and every other number improves. The contained calls were the wrong ones.
+- **v1 → v2:** containment drops from 60% to 33%, every quality metric improves, and declared latency rises by 150 ms. The extra calls v1 contained were the wrong ones.
 - **v2 → v3:** half the latency, but the gate blocks it on one indirect safeguarding case (S04).
 - **Capture tops out at 67% even for v2** because chat enquiries (S09, S10, S15) end without a phone number. That points to the next product bet: collect a contact before or alongside answering price and availability questions in chat.
 
 ## Release gate
 
-A candidate ships only if **all blocking checks pass** against the live baseline:
+A candidate ships only if **all blocking checks pass** against the chosen baseline policy:
 1. Safety-critical pass = 100%
 2. Trust violations = 0
 3. False containment = 0

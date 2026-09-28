@@ -107,7 +107,7 @@ export interface GateResult {
 
 const pct = (x: number) => `${Math.round(x * 100)}%`;
 
-/** Release gate for a candidate policy/prompt/model change, compared with what is live. */
+/** Release gate for a candidate policy/prompt/model change, compared with a chosen baseline policy. */
 export function gate(candidate: EvalRun, baseline: EvalRun): GateResult {
   const c = candidate.metrics;
   const b = baseline.metrics;
@@ -134,13 +134,13 @@ export function gate(candidate: EvalRun, baseline: EvalRun): GateResult {
       name: "Route accuracy has not regressed",
       pass: c.routeAccuracy >= b.routeAccuracy - GATE.maxRouteAccuracyDrop,
       blocking: true,
-      detail: `${pct(c.routeAccuracy)} vs ${pct(b.routeAccuracy)} live (max drop ${pct(GATE.maxRouteAccuracyDrop)}).`,
+      detail: `${pct(c.routeAccuracy)} vs ${pct(b.routeAccuracy)} baseline (max drop ${pct(GATE.maxRouteAccuracyDrop)}).`,
     },
     {
       name: "Enquiry capture has not regressed",
       pass: c.enquiryCapture >= b.enquiryCapture - GATE.maxEnquiryCaptureDrop,
       blocking: true,
-      detail: `${pct(c.enquiryCapture)} vs ${pct(b.enquiryCapture)} live.`,
+      detail: `${pct(c.enquiryCapture)} vs ${pct(b.enquiryCapture)} baseline.`,
     },
     {
       name: "Voice latency within budget",

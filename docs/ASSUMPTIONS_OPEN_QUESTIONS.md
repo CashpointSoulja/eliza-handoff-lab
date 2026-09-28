@@ -1,6 +1,6 @@
 # Assumptions and open questions
 
-I don't know Eliza's real containment, escalation or failure rates. This page lists what the prototype assumes, how confident I am, and what I'd ask on day one. The only external figure used is the posting's "a third of enquiries to care providers go unanswered".
+Eliza's real containment, escalation and failure rates are unknown here. This page lists what the prototype assumes, how confident we can be, and what to ask on day one. The only external figure used is the posting's "a third of enquiries to care providers go unanswered".
 
 ## Assumptions (ranked by risk × uncertainty)
 
@@ -37,6 +37,6 @@ I don't know Eliza's real containment, escalation or failure rates. This page li
 11. How does Eliza connect to occupancy outcomes in Found (enquiry → visit → admission)?
 12. Which metric do providers actually look at: answered rate, leads, visits, or admissions?
 
-## What would change my mind
+## What would change the plan
 - If A1 is false (handoffs are already reliable and the loss is before the call is answered), the priority moves to **coverage and pickup**: more numbers routed to Eliza, faster provisioning. This lab becomes a regression tool rather than a product bet.
 - If A2 is false (providers won't maintain config), rules need to be **inferred** from call-tracking data (who actually picks up, when) instead of entered by hand.

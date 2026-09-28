@@ -28,8 +28,8 @@ for (const r of runs)
 const [v1, v2, v3] = runs;
 const promote = gate(v2, v1);
 const fast = gate(v3, v2);
-console.log(`\nGate v2 vs live v1: ${promote.decision.toUpperCase()}`);
-console.log(`Gate v3 vs live v2: ${fast.decision.toUpperCase()}`);
+console.log(`\nGate v2 vs baseline v1: ${promote.decision.toUpperCase()}`);
+console.log(`Gate v3 vs baseline v2: ${fast.decision.toUpperCase()}`);
 fast.checks.filter((c) => !c.pass).forEach((c) => console.log(`  x ${c.name}: ${c.detail}`));
 fast.regressions.forEach((r) => console.log(`  regression ${r.id} ${r.title}: ${r.baseline} -> ${r.candidate}`));
 

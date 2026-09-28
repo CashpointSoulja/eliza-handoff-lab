@@ -1,6 +1,6 @@
 # 5 Whys: why do care enquiries still get lost?
 
-> These are hypotheses to test, not findings. They start from the one figure in the posting ("a third of enquiries to care providers go unanswered") and follow how an enquiry could still be lost after an AI answers the phone. I have not seen Eliza's data.
+> These are hypotheses to test, not findings. They start from the one figure in the posting ("a third of enquiries to care providers go unanswered") and follow how an enquiry could still be lost after an AI answers the phone. This prototype has not seen any Eliza data.
 
 **Problem:** A family contacts a care provider out of hours and does not become a visit or an admission, even though someone answered.
 

@@ -1,12 +1,12 @@
 # PRD: Eliza Handoff Lab
 
-**Author:** Ayo Ahmed · **Status:** Audition prototype · **Last updated:** 28 Sep 2026
+**Prepared for:** Ayo Ahmed's application · **Drafted by:** Devin (an AI agent) at Ayo's direction, for Ayo's review · **Status:** Audition prototype · **Last updated:** 28 Sep 2026
 
 > This is an independent audition for Lottie's Senior Product Manager (Eliza) role. It is not Lottie's system, it uses no Lottie data, and it makes no claim about how Eliza performs today. Every provider, call and number in it is synthetic.
 
 ## 1. Problem statement
 
-The [official posting](https://jobs.ashbyhq.com/lottie/a11d79e7-a108-4128-9666-7410707b428d) says **"a third of enquiries to care providers go unanswered"**. A family calls at 7pm, nobody picks up, and by the time the voicemail is returned they have moved on. Eliza answers voice and chat on the provider's behalf at any hour.
+The [official posting](https://jobs.ashbyhq.com/lottie/a11d79e7-a108-4128-9666-7410707b428d) says **"a third of enquiries to care providers go unanswered"**. Its example: a family calls a home at 7pm and nobody picks up, or leaves a voicemail that is returned three days later, by which point they have moved on. The posting describes Eliza as the AI agent inside Found that answers calls and live chats on the provider's behalf, any time of day.
 
 Answering the call is only the first step. The enquiry is **won or lost at the handoff**, when Eliza has to decide whether to deal with it herself or bring in a person. That decision depends on the provider's setup: who is on rota tonight, what they allow Eliza to say about fees, which home in the group has a room, and who handles safeguarding. The posting names this directly: *"Knowing when to hand over… so neither side drops the family in between."*
 
@@ -48,7 +48,7 @@ More detail is in *Users, JTBD & stories*.
 | --- | --- | --- |
 | v1 Contain-first | Answer everything, always offer "a transfer" or "a call back within the hour". | Highest containment, and the least trustworthy. |
 | v2 Handoff-aware | Checks the rota before promising, sends safeguarding and clinical questions to named people, follows the provider's disclosure rules, writes a packet. | Every labelled case routed correctly and zero violations. **Ship.** |
-| v3 Fast path | v2 with a faster model and a keyword-only safeguarding check. | About 45% faster to first audio, but misses an indirect safeguarding disclosure. **Blocked.** |
+| v3 Fast path | v2 with a faster model and a keyword-only safeguarding check. | Half the declared latency to first audio (700 ms vs 1,400 ms), but misses an indirect safeguarding disclosure. **Blocked.** |
 
 v3 is the kind of decision the posting describes (*"when a faster model is worth a slightly worse answer"*). The gate answers it: not when the worse answer is on a safety-critical path.
 
