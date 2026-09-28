@@ -82,7 +82,7 @@ The site pairs a soft pink with a mint secondary, on white, with near-black ink.
 | Sticky-note pink icon tiles and the rotated note | Original inline-SVG icons on pink tiles, and the rotated disclaimer note | The icons were drawn for this repo. None of Lottie's pictograms are used. |
 | Flat 16 px cards and hairlines | All panels | — |
 | Mobile hamburger and full-screen menu | The same pattern for the app's nav | — |
-| Wordmark | **Not used.** The header shows "Eliza Handoff Lab" with its own mark and an "Independent prototype" label. | Avoids implying this is an official Lottie product |
+| Wordmark | **Used at Ayo's explicit request** (see "Lottie logo asset" below). The official Lottie wordmark appears in the header, mobile menu and footer, separated by a hairline from the distinct "Eliza Handoff Lab / Independent prototype" name. | Lottie is not presented as the maker or endorser. Every disclaimer is kept, and the footer states that the logo is Lottie's mark and implies no endorsement. |
 | Photos, illustrations, Trustpilot and press logos | **Not used** | These are Lottie's or third parties' assets and trust signals |
 
 ## Product language (public sources, read 28 Sep 2026)
@@ -106,6 +106,13 @@ Colour alone is not enough. The Home copy and the workflow labels were revised t
 - "Playground: run a labelled synthetic conversation" is reframed around a family's enquiry and the provider team's handoff packet.
 - The Home note now says explicitly that nothing here describes how Eliza or Found actually work.
 - Not claimed anywhere: Lottie's customer numbers, Trustpilot ratings, funding, awards or partner quotes. They are real, but they are not needed to explain the handoff problem, and repeating them could read as endorsement.
+
+## Lottie logo asset
+- **What:** Lottie's official pink wordmark, `public/brand/lottie-logo.svg`.
+- **Source:** the inline SVG `<symbol id="lottie-logo" viewBox="0 0 200 63">` embedded in the live https://lottie.org/ page and used there through `<svg viewBox="0 0 200 63"><use href="#lottie-logo"></use></svg>` in the header and footer. Fetched 28 Sep 2026.
+- **Extraction:** the symbol's single `<path>` (`fill="#f68eb7"`, `fill-rule="evenodd"`) was copied byte for byte into a standalone `<svg viewBox="0 0 200 63">`. It was not redrawn, recoloured or modified. SHA-256 of the path `d` attribute: `db6428156c1c00cadf7b14a5602a03da5cb79ca51d1c09228cec133d7e8a1dc6`.
+- **Ownership:** the mark belongs to Lottie (Lottie Organisation Ltd). It is used at Ayo's request to identify the product this prototype studies. This is not a licence, and it does not mean Lottie endorses the prototype.
+- **Placement:** the header lockup (Lottie logo, hairline, "Eliza Handoff Lab / Independent prototype"), the mobile-menu header and the footer. The header link goes to this app's Home, not to lottie.org. The disclaimer banner, the Home note, the mobile-menu note and the footer disclaimer are unchanged.
 
 ## Disclaimer placement
 Every view (Home, Playground, Provider setup, Evals and Docs) shares the same header. That header includes a high-contrast disclaimer bar: *Ayo Ahmed's independent audition prototype. Not affiliated with or endorsed by Lottie. Synthetic data only. Drafted with Devin at Ayo's direction.* The footer repeats it, and the Home hero includes it as a pinned note.
