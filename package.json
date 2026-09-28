@@ -1,0 +1,25 @@
+{
+  "name": "eliza-handoff-lab",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Eliza Handoff Lab — independent audition prototype by Ayo Ahmed (not affiliated with Lottie)",
+  "type": "module",
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "eval": "tsx eval/run.ts",
+    "vendor:marked": "mkdir -p public/vendor && cp node_modules/marked/lib/marked.esm.js public/vendor/marked.esm.js && cp node_modules/marked/LICENSE public/vendor/marked.LICENSE"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "@cloudflare/workers-types": "^5.20260927.1",
+    "@types/node": "^26.6.3",
+    "marked": "18.0.13",
+    "tsx": "^4.23.15",
+    "typescript": "^7.0.2",
+    "vitest": "^5.0.2",
+    "wrangler": "^4.142.0"
+  }
+}

@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Eliza Handoff Lab: independent audition prototype</title>
+  <meta name="description" content="Independent prototype by Ayo Ahmed exploring AI-to-human handoffs for care enquiries. Not affiliated with Lottie." />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23234e52'/%3E%3Cpath d='M9 16h9m0 0-4-4m4 4-4 4M22 10v12' stroke='%23fbe9d0' stroke-width='3' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E" />
+  <link rel="stylesheet" href="/style.css" />
+</head>
+<body>
+  <div class="disclaimer" role="note">
+    <strong>Independent audition by Ayo Ahmed</strong> for Lottie's Senior PM (Eliza) role. This is not Lottie's system, it uses no Lottie data, and it makes no claim about how Eliza performs. All providers, calls and numbers are synthetic.
+    <a href="#docs/prd">Read the PRD</a>
+  </div>
+  <header class="top">
+    <div class="brand">
+      <span class="logo" aria-hidden="true">⇢</span>
+      <div>
+        <h1>Eliza Handoff Lab</h1>
+        <p class="tag">When should the AI hand a care enquiry to a person, and did it keep its promise?</p>
+      </div>
+    </div>
+    <nav class="tabs" role="tablist" aria-label="Sections">
+      <a role="tab" href="#lab" data-tab="lab">Conversation lab</a>
+      <a role="tab" href="#provider" data-tab="provider">Provider setup</a>
+      <a role="tab" href="#evals" data-tab="evals">Evals &amp; release gate</a>
+      <a role="tab" href="#docs" data-tab="docs">Product docs</a>
+    </nav>
+  </header>
+
+  <main>
+    <section id="tab-lab" class="tab" hidden>
+      <div class="lab-grid">
+        <aside class="panel scenarios">
+          <h2>Scenarios</h2>
+          <p class="muted small">15 hand-labelled synthetic conversations, week of Mon 28 Sep 2026.</p>
+          <ul id="scenario-list" class="scenario-list"></ul>
+          <button class="btn ghost full" id="custom-btn" type="button">+ Write your own conversation</button>
+        </aside>
+        <div class="lab-main">
+          <div class="panel controls">
+            <div class="control-row">
+              <label>Policy
+                <select id="policy-a"></select>
+              </label>
+              <label>Compare with
+                <select id="policy-b"><option value="">(none)</option></select>
+              </label>
+              <button class="btn" id="run-btn" type="button">Run conversation</button>
+            </div>
+            <p id="policy-summary" class="muted small"></p>
+            <div id="custom-editor" class="custom-editor" hidden>
+              <div class="control-row">
+                <label>Channel <select id="c-channel"><option value="voice">Voice call</option><option value="chat">Live chat</option></select></label>
+                <label>Starts at (UK time) <input id="c-time" type="datetime-local" value="2026-09-28T19:30" /></label>
+                <label>Number dialled / source <select id="c-tracking"></select></label>
+                <label>Caller number (voice) <input id="c-caller" type="text" value="07700 900999" /></label>
+              </div>
+              <label class="block">Family's turns: one message per line
+                <textarea id="c-turns" rows="4">Hi, I'm Kate. My mum keeps falling and the hospital says she can't go home alone.
+They want to discharge her this week. Do you have a room and how much is it?</textarea>
+              </label>
+            </div>
+          </div>
+          <div id="scenario-header" class="scenario-header"></div>
+          <div id="results" class="results"></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="tab-provider" class="tab" hidden>
+      <div class="panel">
+        <div class="row-between">
+          <div>
+            <h2 id="provider-title">Provider setup</h2>
+            <p class="muted small">Onboarding as configuration: rota, disclosure rules and escalation owners. Edits apply to the lab and evals straight away and are saved in this browser.</p>
+          </div>
+          <button class="btn ghost" id="reset-provider" type="button">Reset to sample</button>
+        </div>
+        <p id="provider-errors" class="error" hidden></p>
+        <h3>Who's on rota, when</h3>
+        <div id="coverage" class="coverage" aria-label="Weekly rota coverage"></div>
+        <h3>Contacts &amp; shifts</h3>
+        <div id="contacts"></div>
+        <div class="two-col">
+          <div>
+            <h3>What Eliza may say</h3>
+            <div id="rules" class="form-grid"></div>
+          </div>
+          <div>
+            <h3>Homes &amp; vacancies</h3>
+            <div id="homes"></div>
+            <h3>Tracking numbers → enquiry source</h3>
+            <div id="tracking"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="tab-evals" class="tab" hidden>
+      <div class="panel controls">
+        <div class="control-row">
+          <label>Live baseline <select id="eval-baseline"></select></label>
+          <label>Candidate <select id="eval-candidate"></select></label>
+          <button class="btn" id="eval-run" type="button">Run labelled set</button>
+          <button class="btn ghost" id="export-reviews" type="button">Export reviews (JSON)</button>
+        </div>
+        <p class="muted small">All figures come from the synthetic labelled set in this repo. Latency is a declared budget per policy, not a measurement. Definitions are in <a href="#docs/metrics">Metrics &amp; evals</a>.</p>
+      </div>
+      <div id="gate"></div>
+      <div id="metrics" class="metrics"></div>
+      <div id="cases" class="panel"></div>
+    </section>
+
+    <section id="tab-docs" class="tab" hidden>
+      <div class="docs-grid">
+        <nav class="panel docs-nav" aria-label="Product documents"><h2>Product docs</h2><ul id="docs-list"></ul></nav>
+        <article id="doc" class="panel doc"></article>
+      </div>
+    </section>
+  </main>
+
+  <dialog id="review-dialog">
+    <form method="dialog" id="review-form">
+      <h3 id="review-title">Review case</h3>
+      <fieldset>
+        <legend>Your verdict</legend>
+        <label><input type="radio" name="verdict" value="agree" checked /> Agree with label and outcome</label>
+        <label><input type="radio" name="verdict" value="label_wrong" /> The label is wrong</label>
+        <label><input type="radio" name="verdict" value="eliza_wrong" /> Eliza is wrong, and the gate should catch it</label>
+      </fieldset>
+      <label class="block">Note <textarea name="note" rows="3" placeholder="What should have happened?"></textarea></label>
+      <div class="row-between">
+        <button class="btn ghost" value="cancel" type="submit">Cancel</button>
+        <button class="btn" value="save" type="submit">Save review</button>
+      </div>
+    </form>
+  </dialog>
+
+  <footer class="foot">
+    Built by Ayo Ahmed as an independent audition. No affiliation with or endorsement by Lottie. Source and docs are in the repository.
+  </footer>
+  <script type="module" src="/app.js"></script>
+</body>
+</html>
