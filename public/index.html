@@ -4,37 +4,162 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Eliza Handoff Lab: independent audition prototype</title>
-  <meta name="description" content="Independent audition prototype for Ayo Ahmed's application, exploring AI-to-human handoffs for care enquiries. Built with Devin (an AI agent). Not affiliated with Lottie." />
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23234e52'/%3E%3Cpath d='M9 16h9m0 0-4-4m4 4-4 4M22 10v12' stroke='%23fbe9d0' stroke-width='3' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E" />
+  <meta name="description" content="Ayo Ahmed's independent audition prototype exploring AI-to-human handoffs for care enquiries. Not affiliated with or endorsed by Lottie. Synthetic data only. Drafted with Devin at Ayo's direction." />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23f68eb7'/%3E%3Cpath d='M6 8.5A3.5 3.5 0 0 1 9.5 5h13A3.5 3.5 0 0 1 26 8.5v8a3.5 3.5 0 0 1-3.5 3.5H14l-5.5 5v-5A3.5 3.5 0 0 1 6 16.5z' fill='none' stroke='%23101828' stroke-width='2.4' stroke-linejoin='round'/%3E%3C/svg%3E" />
+  <link rel="preload" href="/vendor/figtree-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin />
   <link rel="stylesheet" href="/style.css" />
 </head>
 <body>
-  <div class="disclaimer" role="note">
-    <strong>Independent audition prototype</strong> for Ayo Ahmed's application to Lottie's Senior PM (Eliza) role, built with Devin (an AI agent) at Ayo's direction. This is not Lottie's system, it uses no Lottie data, and it makes no claim about how Eliza performs. All providers, calls and numbers are synthetic.
-    <a href="#docs/prd">Read the PRD</a>
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <symbol id="i-mark" viewBox="0 0 32 32"><path d="M6 8.5A3.5 3.5 0 0 1 9.5 5h13A3.5 3.5 0 0 1 26 8.5v8a3.5 3.5 0 0 1-3.5 3.5H14l-5.5 5v-5A3.5 3.5 0 0 1 6 16.5z" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linejoin="round"/><path d="M11.5 12.5h8m0 0-3-3m3 3-3 3" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-chat" viewBox="0 0 24 24"><path d="M4 6.5A2.5 2.5 0 0 1 6.5 4h11A2.5 2.5 0 0 1 20 6.5v7a2.5 2.5 0 0 1-2.5 2.5H11l-4 4v-4h-.5A2.5 2.5 0 0 1 4 13.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><circle cx="9" cy="10" r="1.1" fill="currentColor"/><circle cx="12" cy="10" r="1.1" fill="currentColor"/><circle cx="15" cy="10" r="1.1" fill="currentColor"/></symbol>
+    <symbol id="i-rota" viewBox="0 0 24 24"><rect x="3.5" y="5" width="17" height="15" rx="2.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M3.5 10h17M8 3v4M16 3v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path d="m9 15 2 2 4-4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-gate" viewBox="0 0 24 24"><path d="M12 3.5 5 6v5.5c0 4.3 3 7.6 7 9 4-1.4 7-4.7 7-9V6z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="m9 12 2.2 2.2L15.5 10" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-doc" viewBox="0 0 24 24"><path d="M7 3.5h7l4.5 4.5v11A1.5 1.5 0 0 1 17 20.5H7A1.5 1.5 0 0 1 5.5 19V5A1.5 1.5 0 0 1 7 3.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M14 3.5V8h4.5M8.5 12h7M8.5 15.5h5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></symbol>
+    <symbol id="i-heart" viewBox="0 0 24 24"><path d="M12 19.5s-7.5-4.4-7.5-10A4.2 4.2 0 0 1 12 7a4.2 4.2 0 0 1 7.5 2.5c0 5.6-7.5 10-7.5 10z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></symbol>
+    <symbol id="i-phone" viewBox="0 0 24 24"><path d="M6.5 3.5h3l1.5 4-2 1.5a10 10 0 0 0 6 6l1.5-2 4 1.5v3a2 2 0 0 1-2 2A15.5 15.5 0 0 1 4.5 5.5a2 2 0 0 1 2-2z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></symbol>
+    <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14m0 0-5-5m5 5-5 5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-chev" viewBox="0 0 24 24"><path d="m9.5 6 6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 6.5h16M4 12h16M4 17.5h16" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></symbol>
+    <symbol id="i-close" viewBox="0 0 24 24"><path d="m6.5 6.5 11 11m0-11-11 11" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></symbol>
+  </svg>
+  <a class="skip" href="#main">Skip to content</a>
+  <div class="disclaimer" role="note" aria-label="Disclaimer">
+    <div class="wrap disclaimer-inner">
+      <span class="dis-tag">Independent prototype</span>
+      <p><strong>Ayo Ahmed's independent audition prototype.</strong> Not affiliated with or endorsed by Lottie. Synthetic data only. Drafted with Devin at Ayo's direction.</p>
+    </div>
   </div>
   <header class="top">
-    <div class="brand">
-      <span class="logo" aria-hidden="true">⇢</span>
-      <div>
-        <h1>Eliza Handoff Lab</h1>
-        <p class="tag">When should the AI hand a care enquiry to a person, and did it keep its promise?</p>
-      </div>
+    <div class="wrap top-inner">
+      <button class="icon-btn menu-btn" id="menu-btn" type="button" aria-controls="nav" aria-expanded="false" aria-label="Open menu"><svg><use href="#i-menu"/></svg></button>
+      <a class="brand" href="#home" aria-label="Eliza Handoff Lab home">
+        <span class="logo" aria-hidden="true"><svg><use href="#i-mark"/></svg></span>
+        <span class="brand-text"><b>Eliza Handoff Lab</b><small>Audition prototype</small></span>
+      </a>
+      <nav class="tabs" id="nav" aria-label="Sections">
+        <div class="nav-sheet-head">
+          <span class="brand-text"><b>Eliza Handoff Lab</b><small>Audition prototype</small></span>
+          <button class="icon-btn" id="menu-close" type="button" aria-label="Close menu"><svg><use href="#i-close"/></svg></button>
+        </div>
+        <a href="#home" data-tab="home">Home<svg class="nav-chev" aria-hidden="true"><use href="#i-chev"/></svg></a>
+        <a href="#playground" data-tab="playground">Playground<svg class="nav-chev" aria-hidden="true"><use href="#i-chev"/></svg></a>
+        <a href="#provider" data-tab="provider">Provider setup<svg class="nav-chev" aria-hidden="true"><use href="#i-chev"/></svg></a>
+        <a href="#evals" data-tab="evals">Evals &amp; release gate<svg class="nav-chev" aria-hidden="true"><use href="#i-chev"/></svg></a>
+        <a href="#docs" data-tab="docs">Docs<svg class="nav-chev" aria-hidden="true"><use href="#i-chev"/></svg></a>
+        <p class="nav-note">Ayo Ahmed's independent audition prototype. Not affiliated with or endorsed by Lottie. Synthetic data only. Drafted with Devin at Ayo's direction.</p>
+      </nav>
     </div>
-    <nav class="tabs" role="tablist" aria-label="Sections">
-      <a role="tab" href="#lab" data-tab="lab">Conversation lab</a>
-      <a role="tab" href="#provider" data-tab="provider">Provider setup</a>
-      <a role="tab" href="#evals" data-tab="evals">Evals &amp; release gate</a>
-      <a role="tab" href="#docs" data-tab="docs">Product docs</a>
-    </nav>
   </header>
 
-  <main>
+  <main id="main">
+    <section id="tab-home" class="tab" hidden>
+      <div class="hero">
+        <div class="wrap hero-inner">
+          <p class="eyebrow"><span class="dot"></span> An independent study of the care-enquiry handoff</p>
+          <h1>A family calls a care home at 7pm. Who picks up, and who calls back?</h1>
+          <p class="lede">Lottie's public Eliza role posting says <q>a third of enquiries to care providers go unanswered</q><a class="src" href="https://jobs.ashbyhq.com/lottie/a11d79e7-a108-4128-9666-7410707b428d" target="_blank" rel="noopener">[1]</a>. This prototype explores one part of that problem, the handoff from AI to a person. It uses a synthetic provider, <b id="home-count">15</b> labelled synthetic enquiries, three policy versions and a release gate.</p>
+          <div class="hero-ctas">
+            <a class="btn dark lg" href="#playground">Follow an enquiry <svg><use href="#i-arrow"/></svg></a>
+            <a class="btn outline lg" href="#evals">See the release gate</a>
+          </div>
+          <aside class="note-card" aria-label="About this prototype">
+            <span class="note-pin" aria-hidden="true"><svg><use href="#i-heart"/></svg></span>
+            <p><b>This is not Lottie's product.</b> It is Ayo Ahmed's independent audition prototype. It is not affiliated with or endorsed by Lottie, and it uses only synthetic data. Nothing here describes how Eliza or Found actually work. Drafted with Devin at Ayo's direction.</p>
+          </aside>
+        </div>
+      </div>
+      <div class="value-strip">
+        <div class="wrap value-grid">
+          <div class="value"><span class="tile"><svg><use href="#i-phone"/></svg></span><div><h3>Answered on the provider's behalf</h3><p>The posting describes Eliza, inside Found, answering calls and live chats from families on the provider's behalf, any time of day<a class="src" href="https://jobs.ashbyhq.com/lottie/a11d79e7-a108-4128-9666-7410707b428d" target="_blank" rel="noopener">[1]</a>.</p></div></div>
+          <div class="value"><span class="tile"><svg><use href="#i-rota"/></svg></span><div><h3>Promises checked against the rota</h3><p>In this prototype, v2 only promises a callback from someone on the synthetic rota at that hour. v1 does not check.</p></div></div>
+          <div class="value"><span class="tile"><svg><use href="#i-gate"/></svg></span><div><h3>Safeguarding is a hard gate</h3><p>A candidate policy that misses one labelled safeguarding case is blocked, however fast it is.</p></div></div>
+        </div>
+      </div>
+      <div class="wrap section">
+        <h2 class="section-title">One enquiry, two sides</h2>
+        <p class="section-sub">The family is trying to find care. The provider's team is trying not to lose them. The prototype models the moment in between.</p>
+        <ol class="journey">
+          <li class="step context">
+            <span class="step-n">1</span>
+            <div><span class="chip warn">Context, not modelled</span><h3>A family searches for care</h3><p>Lottie says families use its marketplace to find care homes and home care<a class="src" href="https://jobs.ashbyhq.com/lottie/a11d79e7-a108-4128-9666-7410707b428d" target="_blank" rel="noopener">[1]</a>. Its site shows listings with confirmed availability and detailed pricing<a class="src" href="https://lottie.org/" target="_blank" rel="noopener">[2]</a>.</p></div>
+          </li>
+          <li class="step">
+            <span class="step-n">2</span>
+            <div><span class="chip ok">In the Playground</span><h3>The enquiry reaches the provider</h3><p>A voice call or live chat comes in on a tracked synthetic number, such as a marketplace profile, the provider's website or a hospital discharge leaflet, often out of hours. The posting names call tracking and attribution as part of the product<a class="src" href="https://jobs.ashbyhq.com/lottie/a11d79e7-a108-4128-9666-7410707b428d" target="_blank" rel="noopener">[1]</a>.</p></div>
+          </li>
+          <li class="step">
+            <span class="step-n">3</span>
+            <div><span class="chip ok">In Provider setup</span><h3>The AI follows the provider's rules</h3><p>Each synthetic provider sets what may be said about fees and rooms, who covers out of hours, and who the safeguarding lead is. The posting describes <q>their phone trees, their out-of-hours cover, their weekend rotas, their CRM</q><a class="src" href="https://jobs.ashbyhq.com/lottie/a11d79e7-a108-4128-9666-7410707b428d" target="_blank" rel="noopener">[1]</a>.</p></div>
+          </li>
+          <li class="step">
+            <span class="step-n">4</span>
+            <div><span class="chip ok">In the Playground</span><h3>A person takes over, with the context</h3><p>Safeguarding, clinical and urgent enquiries go to a named person who is actually on the rota. That person receives a handoff packet, so the family doesn't have to repeat themselves. The posting frames the goal as <q>neither side drops the family in between</q><a class="src" href="https://jobs.ashbyhq.com/lottie/a11d79e7-a108-4128-9666-7410707b428d" target="_blank" rel="noopener">[1]</a>.</p></div>
+          </li>
+          <li class="step">
+            <span class="step-n">5</span>
+            <div><span class="chip ok">In Evals</span><h3>Every change is gated before release</h3><p>This prototype builds the items the posting lists: <q>labelled call sets, automated scoring, regression tests before every release, and a human review loop</q><a class="src" href="https://jobs.ashbyhq.com/lottie/a11d79e7-a108-4128-9666-7410707b428d" target="_blank" rel="noopener">[1]</a>. Here that is a synthetic set and a reviewer queue that stays in your browser.</p></div>
+          </li>
+        </ol>
+      </div>
+      <div class="wrap section">
+        <div class="feature-grid">
+          <article class="feature mint">
+            <span class="tile"><svg><use href="#i-chat"/></svg></span>
+            <h2>Playground</h2>
+            <p>Follow one enquiry turn by turn, from the family's side and the AI's side. See the route it takes, any broken provider rules, and the packet the team receives.</p>
+            <a class="btn dark full" href="#playground">Follow an enquiry <svg><use href="#i-arrow"/></svg></a>
+          </article>
+          <article class="feature peach">
+            <span class="tile"><svg><use href="#i-rota"/></svg></span>
+            <h2>Provider setup</h2>
+            <p>Edit a synthetic care group's rotas, out-of-hours cover, rules on sharing fees and rooms, and safeguarding lead. Changes apply straight away.</p>
+            <a class="btn dark full" href="#provider">Configure the provider <svg><use href="#i-arrow"/></svg></a>
+          </article>
+          <article class="feature blue">
+            <span class="tile"><svg><use href="#i-gate"/></svg></span>
+            <h2>Evals &amp; release gate</h2>
+            <p>Measure containment, resolution, escalation, enquiry capture and provider trust against a baseline. The posting names these areas<a class="src" href="https://jobs.ashbyhq.com/lottie/a11d79e7-a108-4128-9666-7410707b428d" target="_blank" rel="noopener">[1]</a>. Hard gates block a release.</p>
+            <a class="btn dark full" href="#evals">Check the gate <svg><use href="#i-arrow"/></svg></a>
+          </article>
+        </div>
+      </div>
+      <div class="wrap section">
+        <h2 class="section-title">Three policies, one story</h2>
+        <p class="section-sub">The same 15 conversations, run through three versions of the handoff policy.</p>
+        <div class="policy-grid">
+          <article class="policy-card"><span class="chip warn">Baseline</span><h3>v1, contain-first</h3><p>It has the highest containment (60% on the synthetic set), but it quotes internal prices, promises rooms, transfers to empty rotas and misses safeguarding.</p></article>
+          <article class="policy-card"><span class="chip ok">Passes gate</span><h3>v2, handoff-aware</h3><p>It checks the rota and the provider's rules, and routes safeguarding and clinical questions to named people. It passes every labelled case.</p></article>
+          <article class="policy-card"><span class="chip bad">Blocked</span><h3>v3, fast path</h3><p>Its declared latency budget is 700 ms lower than v2's, but its lighter safeguarding check misses the indirect disclosure in S04. The posting asks <q>when a faster model is worth a slightly worse answer</q><a class="src" href="https://jobs.ashbyhq.com/lottie/a11d79e7-a108-4128-9666-7410707b428d" target="_blank" rel="noopener">[1]</a>. On a safety-critical path, the gate says it is not.</p></article>
+        </div>
+      </div>
+      <div class="wrap section">
+        <h2 class="section-title">Start with these cases</h2>
+        <div class="link-cards">
+          <button class="link-card" type="button" data-home-open="S01" data-a="v1" data-b="v2"><span><b>S01 · Hospital discharge at 7pm</b><small>v1 vs v2: a room promise versus a callback from someone on the rota</small></span><span class="round-chev" aria-hidden="true"><svg><use href="#i-chev"/></svg></span></button>
+          <button class="link-card" type="button" data-home-open="S04" data-a="v2" data-b="v3"><span><b>S04 · Indirect safeguarding disclosure</b><small>v2 vs v3: an escalation versus the miss the gate blocks</small></span><span class="round-chev" aria-hidden="true"><svg><use href="#i-chev"/></svg></span></button>
+          <a class="link-card" href="#docs/demo"><span><b>5-minute demo script</b><small>How to walk through the lab</small></span><span class="round-chev" aria-hidden="true"><svg><use href="#i-chev"/></svg></span></a>
+        </div>
+      </div>
+      <div class="wrap section">
+        <div class="sources" id="sources">
+          <h2>Sources</h2>
+          <ol>
+            <li><a href="https://jobs.ashbyhq.com/lottie/a11d79e7-a108-4128-9666-7410707b428d" target="_blank" rel="noopener">Lottie, Senior Product Manager (Eliza) job posting</a>, public, read 28 Sep 2026.</li>
+            <li><a href="https://lottie.org/" target="_blank" rel="noopener">lottie.org homepage</a>, public, read 28 Sep 2026.</li>
+          </ol>
+          <p class="muted small">Quotes are used only to explain the problem. All providers, people, phone numbers, conversations and metrics in this app are synthetic. Nothing here describes how Eliza or Found actually work. Brand and product-language notes are in BRAND_RESEARCH.md.</p>
+        </div>
+      </div>
+    </section>
+
     <section id="tab-lab" class="tab" hidden>
+      <div class="wrap">
+      <div class="page-head"><span class="tile"><svg><use href="#i-chat"/></svg></span><div><h1>Playground</h1><p class="muted">Pick a family's enquiry and compare how two policies handle it. The provider team's handoff packet is shown at the bottom.</p></div></div>
       <div class="lab-grid">
         <aside class="panel scenarios">
           <h2>Scenarios</h2>
-          <p class="muted small">15 hand-labelled synthetic conversations, week of Mon 28 Sep 2026.</p>
+          <p class="muted small">15 labelled synthetic enquiries to a synthetic care group, week of Mon 28 Sep 2026.</p>
           <ul id="scenario-list" class="scenario-list"></ul>
           <button class="btn ghost full" id="custom-btn" type="button">+ Write your own conversation</button>
         </aside>
@@ -67,9 +192,12 @@ They want to discharge her this week. Do you have a room and how much is it?</te
           <div id="results" class="results"></div>
         </div>
       </div>
+      </div>
     </section>
 
     <section id="tab-provider" class="tab" hidden>
+      <div class="wrap">
+      <div class="page-head"><span class="tile"><svg><use href="#i-rota"/></svg></span><div><h1>Provider setup</h1><p class="muted">A synthetic care group: tracked numbers, rotas, out-of-hours cover, fee and room rules, and the safeguarding lead.</p></div></div>
       <div class="panel">
         <div class="row-between">
           <div>
@@ -96,9 +224,12 @@ They want to discharge her this week. Do you have a room and how much is it?</te
           </div>
         </div>
       </div>
+      </div>
     </section>
 
     <section id="tab-evals" class="tab" hidden>
+      <div class="wrap">
+      <div class="page-head"><span class="tile"><svg><use href="#i-gate"/></svg></span><div><h1>Evals &amp; release gate</h1><p class="muted">A labelled synthetic set, automated scoring, a regression gate before release, and a human review loop.</p></div></div>
       <div class="panel controls">
         <div class="control-row">
           <label>Baseline <select id="eval-baseline"></select></label>
@@ -111,12 +242,16 @@ They want to discharge her this week. Do you have a room and how much is it?</te
       <div id="gate"></div>
       <div id="metrics" class="metrics"></div>
       <div id="cases" class="panel"></div>
+      </div>
     </section>
 
     <section id="tab-docs" class="tab" hidden>
+      <div class="wrap">
+      <div class="page-head"><span class="tile"><svg><use href="#i-doc"/></svg></span><div><h1>Product docs</h1><p class="muted">Drafts by Devin at Ayo's direction, for Ayo's review.</p></div></div>
       <div class="docs-grid">
         <nav class="panel docs-nav" aria-label="Product documents"><h2>Product docs</h2><ul id="docs-list"></ul></nav>
         <article id="doc" class="panel doc"></article>
+      </div>
       </div>
     </section>
   </main>
@@ -139,7 +274,10 @@ They want to discharge her this week. Do you have a room and how much is it?</te
   </dialog>
 
   <footer class="foot">
-    Independent audition prototype for Ayo Ahmed's application, built with Devin (an AI agent) at Ayo's direction. Not affiliated with or endorsed by Lottie. Source and docs are in the repository.
+    <div class="wrap foot-inner">
+      <p><b>Ayo Ahmed's independent audition prototype.</b> Not affiliated with or endorsed by Lottie. Synthetic data only. Drafted with Devin at Ayo's direction.</p>
+      <p class="muted">No Lottie data, logos or assets are used. Brand research sources are listed in BRAND_RESEARCH.md in the repository.</p>
+    </div>
   </footer>
   <script type="module" src="/app.js"></script>
 </body>
