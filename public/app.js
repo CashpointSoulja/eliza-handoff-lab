@@ -472,6 +472,9 @@ async function boot() {
   });
   $("#menu-btn").addEventListener("click", () => setMenu(!document.body.classList.contains("menu-open")));
   $("#menu-close").addEventListener("click", () => setMenu(false));
+  $("#nav").addEventListener("click", (e) => {
+    if (e.target.closest("a")) setMenu(false);
+  });
   document.addEventListener("keydown", (e) => {
     if (e.key === "Escape") setMenu(false);
   });

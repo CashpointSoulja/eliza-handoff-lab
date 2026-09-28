@@ -261,12 +261,13 @@ textarea { width: 100%; resize: vertical; }
 
 /* ---------- docs ---------- */
 .docs-grid { display: grid; grid-template-columns: 280px 1fr; gap: 1.25rem; align-items: start; }
+.docs-grid > *, .lab-grid > *, .results > * { min-width: 0; }
 .docs-nav { position: sticky; top: 96px; }
 .docs-nav ul { list-style: none; padding: 0; margin: 0.5rem 0 0; display: grid; gap: 0.2rem; }
 .docs-nav a { display: block; padding: 0.5rem 0.65rem; border-radius: 8px; text-decoration: none; color: var(--ink); font-size: 0.93rem; font-weight: 600; }
 .docs-nav a:hover { background: var(--pink-50); }
 .docs-nav a.active { background: var(--pink-200); font-weight: 800; }
-.doc { max-width: 920px; padding: 1.75rem 2rem; line-height: 1.6; }
+.doc { max-width: 920px; padding: 1.75rem 2rem; line-height: 1.6; overflow-wrap: anywhere; }
 .doc h1 { font-size: 2rem; margin-bottom: 0.9rem; }
 .doc h2 { font-size: 1.35rem; margin-top: 1.6rem; }
 .doc table { border-collapse: collapse; width: 100%; font-size: 0.9rem; margin: 0.7rem 0; display: block; overflow-x: auto; }
