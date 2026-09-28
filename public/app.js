@@ -208,7 +208,7 @@ function renderProvider() {
   const p = state.provider;
   $("#provider-title").textContent = `${p.name} · ${p.group}`;
   renderCoverage();
-  $("#contacts").innerHTML = `<table class="table"><thead><tr><th>Contact</th><th>Role</th><th>Shifts (days · start–end)</th></tr></thead><tbody>${p.contacts
+  $("#contacts").innerHTML = `<div class="table-wrap"><table class="table"><thead><tr><th>Contact</th><th>Role</th><th>Shifts (days · start–end)</th></tr></thead><tbody>${p.contacts
     .map(
       (c, ci) => `<tr><td>${esc(c.name)}</td><td>${esc(c.role.replace(/_/g, " "))}</td><td>${c.rota
         .map(
@@ -221,7 +221,7 @@ function renderProvider() {
         )
         .join("")}</td></tr>`,
     )
-    .join("")}</tbody></table>`;
+    .join("")}</tbody></table></div>`;
   const r = p.rules;
   const opt = (v, cur, label) => `<option value="${v}" ${v === cur ? "selected" : ""}>${label}</option>`;
   $("#rules").innerHTML = `
@@ -317,7 +317,7 @@ function renderEval({ baseline, candidate, gate }) {
   const baseById = Object.fromEntries(baseline.cases.map((c) => [c.id, c]));
   const reviewed = Object.keys(state.reviews).length;
   $("#cases").innerHTML = `<div class="row-between"><h2>Labelled cases</h2><span class="muted small">${reviewed} reviewed in this browser</span></div>
-  <table class="table cases"><thead><tr><th>Case</th><th>Expected</th><th>Baseline: ${esc(baseline.policyId)}</th><th>Candidate: ${esc(candidate.policyId)}</th><th>Violations (candidate)</th><th>Review</th></tr></thead><tbody>${candidate.cases
+  <div class="table-wrap"><table class="table cases"><thead><tr><th>Case</th><th>Expected</th><th>Baseline: ${esc(baseline.policyId)}</th><th>Candidate: ${esc(candidate.policyId)}</th><th>Violations (candidate)</th><th>Review</th></tr></thead><tbody>${candidate.cases
     .map((c) => {
       const b = baseById[c.id];
       const rv = state.reviews[c.id];
@@ -327,7 +327,7 @@ function renderEval({ baseline, candidate, gate }) {
         <td>${c.violations.map((v) => esc(state.meta.violationLabels[v])).join("<br/>") || "—"}</td>
         <td><button class="btn tiny ${rv ? "ghost" : ""}" data-review="${c.id}" type="button">${rv ? esc(rv.verdict.replace("_", " ")) : "Review"}</button></td></tr>`;
     })
-    .join("")}</tbody></table>`;
+    .join("")}</tbody></table></div>`;
 }
 
 function openReview(id) {
