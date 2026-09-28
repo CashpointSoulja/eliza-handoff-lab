@@ -1,7 +1,7 @@
 import type { Scenario } from "./types";
 
 /**
- * Synthetic, hand-labelled call and chat set. Written by Ayo for this audition; not real
+ * Synthetic, hand-labelled call and chat set. Written for this audition; not real
  * transcripts and not a claim about how often any of these happen at Lottie or its providers.
  * Week of Mon 28 Sep 2026. Caller numbers are Ofcom drama-range numbers.
  */

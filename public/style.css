@@ -166,3 +166,4 @@ fieldset label { flex-direction: row; gap: 0.4rem; align-items: center; color: v
   .lab-grid, .docs-grid, .two-col, .results.compare { grid-template-columns: 1fr; }
   .scenario-list { max-height: none; }
 }
+.result.loading { color: var(--muted); font-size: 0.9rem; min-height: 6rem; }

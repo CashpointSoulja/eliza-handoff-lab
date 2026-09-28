@@ -25,7 +25,7 @@ Outcome: every enquiry answered AND handed off well
 
 ## Impact vs effort
 
-Scores are my estimates from the posting and general contact-centre experience, not Lottie data. Impact is on trusted handoffs; effort is relative engineering and ops effort.
+Scores are illustrative estimates reasoned from the posting. They are not Lottie data and have not been validated. Impact is on trusted handoffs; effort is relative engineering and ops effort.
 
 | Solution | Impact | Effort | Quadrant |
 | --- | --- | --- | --- |

@@ -1,4 +1,5 @@
 import { marked } from "/vendor/marked.esm.js";
+import { createLabRunner, selectionId, simulatePayload } from "/lab.js";
 
 const $ = (sel) => document.querySelector(sel);
 const esc = (s) =>
@@ -140,24 +141,35 @@ function renderResult(data, policyId) {
   </div>`;
 }
 
-async function runLab() {
+const labRunner = createLabRunner({
+  simulate: (selection, policy) => api("/api/simulate", simulatePayload(selection, policy, state.provider)),
+  renderLoading: (selection, policies) => {
+    const out = $("#results");
+    out.classList.toggle("compare", policies.length > 1);
+    out.setAttribute("aria-busy", "true");
+    out.dataset.scenario = selectionId(selection);
+    out.innerHTML = policies.map(() => `<div class="panel result loading">Running ${esc(selectionId(selection))}…</div>`).join("");
+  },
+  render: (runs) => {
+    const out = $("#results");
+    out.removeAttribute("aria-busy");
+    out.innerHTML = runs.map(([p, d]) => renderResult(d, p)).join("");
+  },
+  renderError: (e) => {
+    const out = $("#results");
+    out.removeAttribute("aria-busy");
+    out.innerHTML = `<div class="panel error">${esc(e.message)}</div>`;
+  },
+});
+
+function runLab() {
   const a = $("#policy-a").value;
   const b = $("#policy-b").value;
   const pol = state.meta.policies.find((p) => p.id === a);
   $("#policy-summary").textContent = pol.summary;
   renderScenarioHeader();
-  const payload = (policy) =>
-    state.custom
-      ? { policy, provider: state.provider, scenario: customScenario() }
-      : { policy, provider: state.provider, scenarioId: state.selected };
-  const out = $("#results");
-  out.classList.toggle("compare", Boolean(b));
-  try {
-    const runs = await Promise.all([a, b].filter(Boolean).map((p) => api("/api/simulate", payload(p)).then((d) => [p, d])));
-    out.innerHTML = runs.map(([p, d]) => renderResult(d, p)).join("");
-  } catch (e) {
-    out.innerHTML = `<div class="panel error">${esc(e.message)}</div>`;
-  }
+  const selection = state.custom ? { custom: true, scenario: customScenario() } : { custom: false, scenarioId: state.selected };
+  return labRunner(selection, [a, b].filter(Boolean));
 }
 
 /* ---------- provider ---------- */
@@ -260,8 +272,8 @@ function metricCard(label, key, fmt, better, run, base) {
   const b = base.metrics[key];
   const d = v - b;
   const good = better === "up" ? d > 0 : d < 0;
-  const delta = d === 0 ? `<span class="delta same">same as live</span>` : `<span class="delta ${good ? "up" : "down"}">${d > 0 ? "+" : ""}${fmt === pct ? `${Math.round(d * 100)} pts` : d} vs live</span>`;
-  return `<div class="metric"><span class="mlabel">${label}</span><span class="mval">${fmt(v)}</span>${delta}<span class="mbase">live: ${fmt(b)}</span></div>`;
+  const delta = d === 0 ? `<span class="delta same">same as baseline</span>` : `<span class="delta ${good ? "up" : "down"}">${d > 0 ? "+" : ""}${fmt === pct ? `${Math.round(d * 100)} pts` : d} vs baseline</span>`;
+  return `<div class="metric"><span class="mlabel">${label}</span><span class="mval">${fmt(v)}</span>${delta}<span class="mbase">baseline: ${fmt(b)}</span></div>`;
 }
 
 async function runEval() {
@@ -279,12 +291,12 @@ async function runEval() {
 function renderEval({ baseline, candidate, gate }) {
   const ship = gate.decision === "ship";
   $("#gate").innerHTML = `<div class="panel gate ${ship ? "ship" : "block"}">
-    <div class="row-between"><h2>${ship ? "SHIP" : "BLOCKED"}: ${esc(candidate.policyName)} vs live ${esc(baseline.policyName)}</h2></div>
+    <div class="row-between"><h2>${ship ? "SHIP" : "BLOCKED"}: ${esc(candidate.policyName)} vs baseline ${esc(baseline.policyName)}</h2></div>
     <ul class="checks">${gate.checks
       .map((c) => `<li class="${c.pass ? "pass" : c.blocking ? "fail" : "warn"}"><b>${c.pass ? "Pass" : c.blocking ? "Fail" : "Warn"}</b> ${esc(c.name)}: <span class="muted">${esc(c.detail)}</span></li>`)
       .join("")}</ul>
     ${gate.regressions.length ? `<p><b>Regressions:</b> ${gate.regressions.map((r) => `${r.id} ${esc(r.title)} (${esc(state.meta.routeLabels[r.baseline])} → ${esc(state.meta.routeLabels[r.candidate])})`).join("; ")}</p>` : ""}
-    ${gate.fixes.length ? `<p><b>Fixed vs live:</b> ${gate.fixes.map((r) => r.id).join(", ")}</p>` : ""}
+    ${gate.fixes.length ? `<p><b>Fixed vs baseline:</b> ${gate.fixes.map((r) => r.id).join(", ")}</p>` : ""}
   </div>`;
   const P = pct;
   const N = (x) => String(x);
@@ -305,7 +317,7 @@ function renderEval({ baseline, candidate, gate }) {
   const baseById = Object.fromEntries(baseline.cases.map((c) => [c.id, c]));
   const reviewed = Object.keys(state.reviews).length;
   $("#cases").innerHTML = `<div class="row-between"><h2>Labelled cases</h2><span class="muted small">${reviewed} reviewed in this browser</span></div>
-  <table class="table cases"><thead><tr><th>Case</th><th>Expected</th><th>Live: ${esc(baseline.policyId)}</th><th>Candidate: ${esc(candidate.policyId)}</th><th>Violations (candidate)</th><th>Review</th></tr></thead><tbody>${candidate.cases
+  <table class="table cases"><thead><tr><th>Case</th><th>Expected</th><th>Baseline: ${esc(baseline.policyId)}</th><th>Candidate: ${esc(candidate.policyId)}</th><th>Violations (candidate)</th><th>Review</th></tr></thead><tbody>${candidate.cases
     .map((c) => {
       const b = baseById[c.id];
       const rv = state.reviews[c.id];
