@@ -78,11 +78,34 @@ The site pairs a soft pink with a mint secondary, on white, with near-black ink.
 | Pink hero band and lighter value strip | Home hero and the "at a glance" strip | — |
 | Pastel feature cards with dark "→" buttons | Home cards for the Playground, Provider setup and Evals | — |
 | Round pink chevron link cards | Home "Start with these cases" and docs links | — |
+| Sourced claims in product copy | Superscript source markers [1] and [2] on Home, plus a Sources list | Lottie facts are quoted only from public pages |
 | Sticky-note pink icon tiles and the rotated note | Original inline-SVG icons on pink tiles, and the rotated disclaimer note | The icons were drawn for this repo. None of Lottie's pictograms are used. |
 | Flat 16 px cards and hairlines | All panels | — |
 | Mobile hamburger and full-screen menu | The same pattern for the app's nav | — |
 | Wordmark | **Not used.** The header shows "Eliza Handoff Lab" with its own mark and an "Independent prototype" label. | Avoids implying this is an official Lottie product |
 | Photos, illustrations, Trustpilot and press logos | **Not used** | These are Lottie's or third parties' assets and trust signals |
+
+## Product language (public sources, read 28 Sep 2026)
+Colour alone is not enough. The Home copy and the workflow labels were revised to match how Lottie publicly describes its products. Every business claim in the app links to one of these sources.
+
+| Source | What it says (quoted or closely paraphrased) | Where it shows up in the app |
+| --- | --- | --- |
+| [Eliza role posting](https://jobs.ashbyhq.com/lottie/a11d79e7-a108-4128-9666-7410707b428d) | "Families use our marketplace to find care homes and home care. Care providers use Found, our software, to manage enquiries, occupancy and finances. Eliza is the AI agent inside Found. She answers calls and live chats from families enquiring about care, on behalf of the care provider, any time of day." | Home journey steps 1–2 and the "Answered on the provider's behalf" value |
+| Posting | "a third of enquiries to care providers go unanswered", with the example of a family calling at 7pm | Home hero |
+| Posting | "their phone trees, their out-of-hours cover, their weekend rotas, their CRM" | Journey step 3; Provider setup subtitle |
+| Posting | "Knowing when to hand over… so neither side drops the family in between" | Journey step 4; handoff packet framing |
+| Posting | "labelled call sets, automated scoring, regression tests before every release, and a human review loop"; metrics "containment, resolution, escalation, enquiry conversion, and provider trust"; "when a faster model is worth a slightly worse answer" | Journey step 5, the Evals subtitle, the Evals feature card and the v3 policy card |
+| Posting | Call tracking: "number provisioning, routing, recording, transcription, and the attribution" | Journey step 2 (tracked synthetic numbers and sources) |
+| [lottie.org](https://lottie.org/) | "The only directory to showcase care services with confirmed availability and detailed pricing"; free shortlists; urgent care requests | Journey step 1, marked "Context, not modelled" |
+| [lottie.org/services-for-care-providers](https://lottie.org/services-for-care-providers/) | The partner portal lets providers "view enquiries … including contact details, residency requirements and funding information" | Informs the handoff-packet fields (caller, funding, source). Not presented as Lottie's format. |
+
+### Wording corrections made in this pass
+- "15 hand-labelled" is now "15 labelled synthetic enquiries". The labels were drafted with Devin at Ayo's direction, not labelled by hand by a care team.
+- "Handoffs are only offered to people who are actually on shift" was true only of v2. It now says v2 checks the rota and v1 does not.
+- "v3 is 700 ms faster" is now "declared latency budget 700 ms lower". Latency is a declared budget, not a measurement.
+- "Playground: run a labelled synthetic conversation" is reframed around a family's enquiry and the provider team's handoff packet.
+- The Home note now says explicitly that nothing here describes how Eliza or Found actually work.
+- Not claimed anywhere: Lottie's customer numbers, Trustpilot ratings, funding, awards or partner quotes. They are real, but they are not needed to explain the handoff problem, and repeating them could read as endorsement.
 
 ## Disclaimer placement
 Every view (Home, Playground, Provider setup, Evals and Docs) shares the same header. That header includes a high-contrast disclaimer bar: *Ayo Ahmed's independent audition prototype. Not affiliated with or endorsed by Lottie. Synthetic data only. Drafted with Devin at Ayo's direction.* The footer repeats it, and the Home hero includes it as a pinned note.

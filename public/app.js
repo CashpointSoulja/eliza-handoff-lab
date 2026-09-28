@@ -484,7 +484,6 @@ async function boot() {
     window.scrollTo(0, 0);
   });
   $("#home-count").textContent = String(state.meta.scenarios.length);
-  $("#home-count-2").textContent = String(state.meta.scenarios.length);
   renderScenarioList();
   route();
   runLab();

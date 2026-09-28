@@ -9,5 +9,6 @@
   },
   // Product docs in docs/*.md are bundled as text and served at /api/docs/:slug.
   "rules": [{ "type": "Text", "globs": ["**/*.md"], "fallthrough": true }],
-  "observability": { "enabled": true }
+  "observability": { "enabled": true },
+  "previews": {}
 }
