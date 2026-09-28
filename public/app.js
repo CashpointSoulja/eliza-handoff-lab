@@ -29,11 +29,29 @@ const clone = (x) => JSON.parse(JSON.stringify(x));
 const saveProvider = () => localStorage.setItem(PROVIDER_KEY, JSON.stringify(state.provider));
 
 /* ---------- tabs ---------- */
+const TAB_SECTIONS = { home: "home", playground: "lab", lab: "lab", provider: "provider", evals: "evals", docs: "docs" };
+
+function currentTab() {
+  const [tab, sub] = (location.hash.slice(1) || "home").split("/");
+  return { name: tab in TAB_SECTIONS ? tab : "home", sub };
+}
+
+function setMenu(open) {
+  document.body.classList.toggle("menu-open", open);
+  $("#menu-btn").setAttribute("aria-expanded", String(open));
+}
+
 function route() {
-  const [tab, sub] = (location.hash.slice(1) || "lab").split("/");
-  const name = ["lab", "provider", "evals", "docs"].includes(tab) ? tab : "lab";
+  const { name: tab, sub } = currentTab();
+  const name = TAB_SECTIONS[tab];
+  const navTab = name === "lab" ? "playground" : name;
+  setMenu(false);
   document.querySelectorAll(".tab").forEach((s) => (s.hidden = s.id !== `tab-${name}`));
-  document.querySelectorAll(".tabs a").forEach((a) => a.setAttribute("aria-selected", String(a.dataset.tab === name)));
+  document.querySelectorAll(".tabs a").forEach((a) => {
+    if (a.dataset.tab === navTab) a.setAttribute("aria-current", "page");
+    else a.removeAttribute("aria-current");
+  });
+  document.body.dataset.tab = navTab;
   if (name === "docs") openDoc(sub || "prd");
   if (name === "evals" && !state.lastEval) runEval();
   if (name === "provider") renderProvider();
@@ -322,7 +340,7 @@ function renderEval({ baseline, candidate, gate }) {
       const b = baseById[c.id];
       const rv = state.reviews[c.id];
       const cell = (x) => `<td class="${x.correct ? "ok" : "bad"}">${esc(state.meta.routeLabels[x.actual])}</td>`;
-      return `<tr><td><a href="#lab" data-open="${c.id}">${c.id}</a> ${esc(c.title)}${c.safetyCritical ? ' <b class="crit">safety</b>' : ""}</td>
+      return `<tr><td><a href="#playground" data-open="${c.id}">${c.id}</a> ${esc(c.title)}${c.safetyCritical ? ' <b class="crit">safety</b>' : ""}</td>
         <td>${esc(state.meta.routeLabels[c.expected])}</td>${cell(b)}${cell(c)}
         <td>${c.violations.map((v) => esc(state.meta.violationLabels[v])).join("<br/>") || "—"}</td>
         <td><button class="btn tiny ${rv ? "ghost" : ""}" data-review="${c.id}" type="button">${rv ? esc(rv.verdict.replace("_", " ")) : "Review"}</button></td></tr>`;
@@ -442,10 +460,28 @@ async function boot() {
       runLab();
     }
   });
+  $("#tab-home").addEventListener("click", (e) => {
+    const o = e.target.closest("[data-home-open]");
+    if (!o) return;
+    state.selected = o.dataset.homeOpen;
+    state.custom = false;
+    renderScenarioList();
+    $("#policy-a").value = o.dataset.a;
+    $("#policy-b").value = o.dataset.b;
+    location.hash = "#playground";
+  });
+  $("#menu-btn").addEventListener("click", () => setMenu(!document.body.classList.contains("menu-open")));
+  $("#menu-close").addEventListener("click", () => setMenu(false));
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") setMenu(false);
+  });
   window.addEventListener("hashchange", () => {
     route();
-    if (location.hash.startsWith("#lab")) runLab();
+    if (TAB_SECTIONS[currentTab().name] === "lab") runLab();
+    window.scrollTo(0, 0);
   });
+  $("#home-count").textContent = String(state.meta.scenarios.length);
+  $("#home-count-2").textContent = String(state.meta.scenarios.length);
   renderScenarioList();
   route();
   runLab();
