@@ -1,6 +1,6 @@
 # Brand research: lottie.org public site
 
-This is research for **Ayo Ahmed's independent audition prototype**. The prototype is not affiliated with or endorsed by Lottie, and it uses only synthetic data. Devin drafted this research at Ayo's direction.
+This is research for **Ayo Ahmed's independent audition prototype**. The prototype is not affiliated with or endorsed by Lottie, and it uses only synthetic data.
 
 The aim was to make the Eliza Handoff Lab look like it could sit in Lottie's product family, while making clear it is *not* a Lottie product. Everything below was observed on Lottie's public home page. No Lottie assets were copied into this repo: no logo, illustrations, photos, pictograms or fonts.
 
@@ -100,7 +100,7 @@ Colour alone is not enough. The Home copy and the workflow labels were revised t
 | [lottie.org/services-for-care-providers](https://lottie.org/services-for-care-providers/) | The partner portal lets providers "view enquiries … including contact details, residency requirements and funding information" | Informs the handoff-packet fields (caller, funding, source). Not presented as Lottie's format. |
 
 ### Wording corrections made in this pass
-- "15 hand-labelled" is now "15 labelled synthetic enquiries". The labels were drafted with Devin at Ayo's direction, not labelled by hand by a care team.
+- "15 hand-labelled" is now "15 labelled synthetic enquiries". The labels are synthetic, not labelled by a care team.
 - "Handoffs are only offered to people who are actually on shift" was true only of v2. It now says v2 checks the rota and v1 does not.
 - "v3 is 700 ms faster" is now "declared latency budget 700 ms lower". Latency is a declared budget, not a measurement.
 - "Playground: run a labelled synthetic conversation" is reframed around a family's enquiry and the provider team's handoff packet.
@@ -115,4 +115,4 @@ Colour alone is not enough. The Home copy and the workflow labels were revised t
 - **Placement:** the header lockup (Lottie logo, hairline, "Eliza Handoff Lab / Independent prototype"), the mobile-menu header and the footer. The header link goes to this app's Home, not to lottie.org. The disclaimer banner, the Home note, the mobile-menu note and the footer disclaimer are unchanged.
 
 ## Disclaimer placement
-Every view (Home, Playground, Provider setup, Evals and Docs) shares the same header. That header includes a high-contrast disclaimer bar: *Ayo Ahmed's independent audition prototype. Not affiliated with or endorsed by Lottie. Synthetic data only. Drafted with Devin at Ayo's direction.* The footer repeats it, and the Home hero includes it as a pinned note.
+Every view (Home, Playground, Provider setup, Evals and Docs) shares the same header. That header includes a high-contrast disclaimer bar: *Ayo Ahmed's independent audition prototype. Not affiliated with or endorsed by Lottie. Synthetic data only.* The footer repeats it, and the Home hero includes it as a pinned note.
