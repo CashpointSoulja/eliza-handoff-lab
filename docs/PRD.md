@@ -1,6 +1,6 @@
 # PRD: Eliza Handoff Lab
 
-**Prepared for:** Ayo Ahmed's application · **Drafted by:** Devin (an AI agent) at Ayo's direction, for Ayo's review · **Status:** Audition prototype · **Last updated:** 28 Sep 2026
+**Prepared for:** Ayo Ahmed's application · **Status:** Audition prototype · **Last updated:** 28 Sep 2026
 
 > This is an independent audition for Lottie's Senior Product Manager (Eliza) role. It is not Lottie's system, it uses no Lottie data, and it makes no claim about how Eliza performs today. Every provider, call and number in it is synthetic.
 
