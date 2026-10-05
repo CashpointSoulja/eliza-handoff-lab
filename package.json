@@ -2,7 +2,7 @@
   "name": "eliza-handoff-lab",
   "version": "0.1.0",
   "private": true,
-  "description": "Eliza Handoff Lab — independent audition prototype for Ayo Ahmed's application, built with Devin (not affiliated with Lottie)",
+  "description": "Eliza Handoff Lab — independent audition prototype for Ayo Ahmed's application (not affiliated with Lottie)",
   "type": "module",
   "scripts": {
     "dev": "wrangler dev",
