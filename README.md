@@ -4,7 +4,6 @@ A working lab for one product question: **when should an AI agent hand a care en
 
 > **Independent audition prototype for Ayo Ahmed's application** to Lottie's [Senior Product Manager (Eliza)](https://jobs.ashbyhq.com/lottie/a11d79e7-a108-4128-9666-7410707b428d) role. This is not Lottie's system. It uses no Lottie data and makes no claim about how Eliza performs today. Every provider, call, phone number and metric here is synthetic.
 >
-> **Who made it:** the code and the first drafts of the product docs were produced by Devin (an AI agent) at Ayo's direction, for Ayo's review. They are not presented as Ayo's unaided work.
 
 ## Product docs (start here)
 These docs are also shown in the app under **Product docs**.
